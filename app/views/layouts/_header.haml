@@ -1,0 +1,27 @@
+.navbar{ class: current_page?(root_path) ? nil : 'not-home' }
+  .left-logo 
+    = link_to root_path do
+      = image_tag("logo.png", alt: "Logo")
+
+    %a{ href: "#" }
+      %p 
+        Eureka 
+        %br 
+        Coffee 
+  
+  .right-menu 
+    = link_to "Home", root_path
+    %i.bi.bi-circle-fill
+    = link_to "About", "/about"
+    %i.bi.bi-circle-fill
+    = link_to "Services", "/services"
+    %i.bi.bi-circle-fill
+    = link_to "Blog", "/blog"
+    %i.bi.bi-circle-fill
+    = link_to "Contacts", "/contacts"
+
+
+
+
+
+
