@@ -87,7 +87,6 @@
     background-color: #f3f3f3;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-
     a {
       padding: 10px;
       text-decoration: none;
@@ -98,7 +97,6 @@
       }
     }
   }
-
   span{
     text-transform: uppercase;
     font-weight: bold;
@@ -147,7 +145,6 @@
   align-items: center;
   justify-content: center;
   gap: 5px;
-
   p{
     width: 50px;
     margin: 0;
@@ -172,7 +169,6 @@
   padding: 20px;
   box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
   transition: transform 0.3s ease;
-
   p {
     text-align: center;
     font-size: 10px;
@@ -209,7 +205,6 @@
 .food-description {
   font-size: 16px;
   color: darkgray;
-
   p {
     display: inline;
     line-height: 0.5;

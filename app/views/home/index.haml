@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 = javascript_include_tag 'category-filter'
+=======
+= javascript_include_tag 'script'
+>>>>>>> 6793516 (Store the data in the database, add filter functionalities.)
 = javascript_include_tag 'price-filter', defer: true
 
 - provide(:title, "Home")
@@ -20,24 +24,40 @@
           %div{ onclick: "toggleDropdownMenu('dropdown-content1', 'arrow1')" }
             %span#selected= @selected_category 
             %i#arrow1.bi.bi-caret-down-fill
+<<<<<<< HEAD
           .dropdown-content#dropdown-content1
             %a#show-all{ href: "#", onclick: "submitFormWithCategory('Category')" } Show All
             - Product.categories.keys.each do |category|
               %a{ href: "#", onclick: "submitFormWithCategory('#{category}')" }= category.humanize
+=======
+          .dropdown-content#dropdown-content1{ style: "display: none;"}
+            %a#show-all{href: "#", onclick: "submitFormWithCategory('Category')"} Show All
+            - Product.categories.keys.each do |category|
+              %a{href: "#", onclick: "submitFormWithCategory('#{category}')"}= category.humanize
+>>>>>>> 6793516 (Store the data in the database, add filter functionalities.)
           
         .dropdown
           %div{ onclick: "toggleDropdownMenu('dropdown-content2', 'arrow2')" }
             %span#vegetarian=  @vegetarian 
             %i#arrow2.bi.bi-caret-down-fill
+<<<<<<< HEAD
           .dropdown-content#dropdown-content2
             %a{ href: "#", onclick: "submitFormWithVegetarian('Vegetarian')" } Show All
             %a{ href: "#", onclick: "submitFormWithVegetarian(true, 'Is Vegetarian')" } 
               Vegetarian
             %a{ href: "#", onclick: "submitFormWithVegetarian(false, 'Non-vegetarian')" } 
+=======
+          .dropdown-content#dropdown-content2{ style: "display: none;"}
+            %a{href: "#", onclick: "submitFormWithVegetarian('Vegetarian')"} Show All
+            %a{href: "#", onclick: "submitFormWithVegetarian(true)"} 
+              Vegetarian
+            %a{href: "#", onclick: "submitFormWithVegetarian(false)"} 
+>>>>>>> 6793516 (Store the data in the database, add filter functionalities.)
               Non-vegetarian
         = hidden_field_tag :category, params[:category]
         = hidden_field_tag :vegetarian, params[:vegetarian]
 
+<<<<<<< HEAD
         -# .dropdown
         -#   %div{ onclick: "toggleDropdownMenu('dropdown-content3', 'arrow3')" }
         -#     %span Sorting
@@ -50,6 +70,8 @@
         -#       Descending
         
 
+=======
+>>>>>>> 6793516 (Store the data in the database, add filter functionalities.)
     .price-filter
       %p#min-slider
       #uislider
