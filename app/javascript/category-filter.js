@@ -91,4 +91,3 @@ function applyFilters(){
   form.submit();
   
 }
-
