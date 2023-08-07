@@ -1,4 +1,4 @@
-= javascript_include_tag 'script'
+= javascript_include_tag 'category-filter'
 = javascript_include_tag 'price-filter', defer: true
 
 - provide(:title, "Home")
@@ -20,32 +20,48 @@
           %div{ onclick: "toggleDropdownMenu('dropdown-content1', 'arrow1')" }
             %span#selected= @selected_category 
             %i#arrow1.bi.bi-caret-down-fill
-          .dropdown-content#dropdown-content1{ style: "display: none;"}
-            %a#show-all{href: "#", onclick: "submitFormWithCategory('Category')"} Show All
+          .dropdown-content#dropdown-content1
+            %a#show-all{ href: "#", onclick: "submitFormWithCategory('Category')" } Show All
             - Product.categories.keys.each do |category|
-              %a{href: "#", onclick: "submitFormWithCategory('#{category}')"}= category.humanize
+              %a{ href: "#", onclick: "submitFormWithCategory('#{category}')" }= category.humanize
           
         .dropdown
           %div{ onclick: "toggleDropdownMenu('dropdown-content2', 'arrow2')" }
             %span#vegetarian=  @vegetarian 
             %i#arrow2.bi.bi-caret-down-fill
-          .dropdown-content#dropdown-content2{ style: "display: none;"}
-            %a{href: "#", onclick: "submitFormWithVegetarian('Vegetarian')"} Show All
-            %a{href: "#", onclick: "submitFormWithVegetarian(true)"} 
+          .dropdown-content#dropdown-content2
+            %a{ href: "#", onclick: "submitFormWithVegetarian('Vegetarian')" } Show All
+            %a{ href: "#", onclick: "submitFormWithVegetarian(true, 'Is Vegetarian')" } 
               Vegetarian
-            %a{href: "#", onclick: "submitFormWithVegetarian(false)"} 
+            %a{ href: "#", onclick: "submitFormWithVegetarian(false, 'Non-vegetarian')" } 
               Non-vegetarian
         = hidden_field_tag :category, params[:category]
         = hidden_field_tag :vegetarian, params[:vegetarian]
+
+        -# .dropdown
+        -#   %div{ onclick: "toggleDropdownMenu('dropdown-content3', 'arrow3')" }
+        -#     %span Sorting
+        -#     %i#arrow3.bi.bi-caret-down-fill
+        -#   .dropdown-content#dropdown-content3
+        -#     %a{ href: "#" } Show All
+        -#     %a{ href: "#" } 
+        -#       Ascending
+        -#     %a{ href: "#"} 
+        -#       Descending
+        
 
     .price-filter
       %p#min-slider
       #uislider
       %p#max-slider
+    
+    .button-container
+      %button{ type: "button", onclick: "applyFilters()" } Apply Filters
+     
 
   .menu
     - @products.each do |product|
-      .food-item{ "data-price" => product.price }
+      .food-item#filtered-results{ "data-price" => product.price }
         .food-image
           - if product.photo.attached?
             = image_tag product.photo, class: "food-image"

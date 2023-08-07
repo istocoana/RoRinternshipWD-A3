@@ -23,6 +23,7 @@ function toggleDropdownMenu(dropdownId, arrowId) {
   var dropdown = document.getElementById(dropdownId);
   var arrow = document.getElementById(arrowId);
 
+
   var otherDropdowns = document.querySelectorAll(".dropdown-content");
   otherDropdowns.forEach(function(otherDropdown) {
     if (otherDropdown !== dropdown) {
@@ -60,7 +61,6 @@ document.addEventListener("click", function(event) {
   });
 });
 
-
 function submitFormWithCategory(category) {
   var form = document.getElementById('filter_form');
   let selected = document.getElementById("selected");
@@ -73,8 +73,6 @@ function submitFormWithCategory(category) {
   } else {
     selected.innerHTML = category ? category.replace(/_/g, ' ').charAt(0).toUpperCase() + category.slice(1) : "Category";
   }
-
-  form.submit();
 }
 
 function submitFormWithVegetarian(isVegetarian, text) {
@@ -82,8 +80,11 @@ function submitFormWithVegetarian(isVegetarian, text) {
   let vegetarian = document.getElementById("vegetarian");
   form.vegetarian.value = isVegetarian;
   vegetarian.innerHTML = text;
-
-  form.submit();
 }
 
- 
+
+function applyFilters(){
+  var form = document.getElementById('filter_form');
+  form.submit();
+  
+}

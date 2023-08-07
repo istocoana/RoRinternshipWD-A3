@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   
   get "/product", to: "products#product"
 
+  get '/services/product_filter_service', to: 'product_filter_service#filter'
+
+
   resources :products, only: [:index, :show]
 
 
