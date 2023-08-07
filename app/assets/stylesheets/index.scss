@@ -147,6 +147,33 @@
 
 }
 
+#dropdown-content1, #dropdown-content2{
+  display: none;
+}
+
+.button-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  padding: 10px;
+
+  button{
+    background-color: rgba(242, 148, 86, 255);
+    padding: 6px 12px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    &:hover{
+      background-color: rgb(255, 172, 117);
+    }
+    &:active{
+      background-color: rgb(230, 162, 117);
+    }
+  }
+
+}
+
 .price-filter {
   display: flex;
   align-items: center;
