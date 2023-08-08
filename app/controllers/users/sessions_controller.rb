@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 class Users::SessionsController < Devise::SessionsController
   
   def destroy 
@@ -5,4 +6,11 @@ class Users::SessionsController < Devise::SessionsController
     redirect_to root_path, notice: 'You have been signed out successfully.'
   end
 
+=======
+class SessionsController < ApplicationController
+  def destroy
+    sign_out(current_user) if user_signed_in?
+    redirect_to root_path, notice: 'You have been signed out successfully.'
+  end
+>>>>>>> a48ecfb (Sign out problem)
 end
