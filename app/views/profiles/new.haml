@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .profile-form
   = form_for(@profile) do |f|
     %div
@@ -13,3 +14,20 @@
     %div 
       = f.text_field :county, placeholder: 'County *'
     = f.submit "Complete Profile"
+=======
+ = form_for(resource, as: resource_name, url: new_profile_path) do |f|
+    - f.fields_for :profile do |pf|
+      %div
+        = pf.text_field :first_name, placeholder: 'First name *'
+      %div
+        = pf.text_field :last_name, placeholder: 'Last name *'
+      %div
+        = pf.text_field :phone, placeholder: 'Phone *'
+      %div 
+        = pf.text_field :street_address, placeholder: 'Street Address *'
+      %div 
+        = pf.text_field :city, placeholder: 'City *'
+      %div 
+        = pf.text_field :county, placeholder: 'County *'
+      = f.submit "Complete Profile"
+>>>>>>> a48ecfb (Sign out problem)
