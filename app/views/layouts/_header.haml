@@ -19,6 +19,15 @@
     = link_to "Blog", "/blog"
     %i.bi.bi-circle-fill
     = link_to "Contacts", "/contacts"
+    - if user_signed_in?
+      %i.bi.bi-circle-fill
+      = link_to "Sign out", destroy_user_session_path, method: :delete,  'data-turbo-method': :delete
+      = current_user.email
+      = link_to "Profile", user_profile_path
+    - else
+      %i.bi.bi-circle-fill
+      = link_to "Sign in", new_user_registration
+   
 
 
 
