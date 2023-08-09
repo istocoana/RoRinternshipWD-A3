@@ -12,13 +12,22 @@
   .right-menu 
     = link_to "Home", root_path
     %i.bi.bi-circle-fill
-    = link_to "About", "/about"
+    = link_to "About", about_path
     %i.bi.bi-circle-fill
     = link_to "Services", "/services"
     %i.bi.bi-circle-fill
     = link_to "Blog", "/blog"
     %i.bi.bi-circle-fill
     = link_to "Contacts", "/contacts"
+    - if user_signed_in?
+      %i.bi.bi-circle-fill
+      = link_to "Sign out", destroy_user_session_path, method: :delete, 'data-turbo-method': :delete    
+      = link_to 'My Profile', user_profile_path
+    - else
+      %i.bi.bi-circle-fill
+      = link_to "Sign up", new_user_registration_path
+      = link_to "Log in", new_user_session_path
+   
 
 
 

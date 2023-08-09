@@ -1,0 +1,15 @@
+.profile-form
+  = form_for(@profile) do |f|
+    %div
+      = f.text_field :first_name, placeholder: 'First name *'
+    %div
+      = f.text_field :last_name, placeholder: 'Last name *'
+    %div
+      = f.text_field :phone, placeholder: 'Phone *'
+    %div 
+      = f.text_field :street_address, placeholder: 'Street Address *'
+    %div 
+      = f.text_field :city, placeholder: 'City *'
+    %div 
+      = f.text_field :county, placeholder: 'County *'
+    = f.submit "Complete Profile"

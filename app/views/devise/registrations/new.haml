@@ -1,0 +1,23 @@
+= stylesheet_link_tag "form"
+= javascript_include_tag "form"
+
+.container
+  %h2.form-header Sign up
+  = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+    .errors
+      = render "devise/shared/error_messages", resource: resource
+    .form-checks
+      %div
+        = f.radio_button :role, 'admin', class: 'form-check-input'
+        = label :role_admin, 'Restaurant owner', class: 'form-check-label'
+      %div
+        = f.radio_button :role, 'customer', class: 'form-check-input'
+        = label :role_customer, 'Customer', class: 'form-check-label'
+    .form-field
+      = f.email_field :email, autocomplete: "email", placeholder: 'Email *', id: "form-field"
+      = f.password_field :password, autocomplete: "new-password", placeholder: 'Password *', id: "form-field"
+      = f.password_field :password_confirmation, autocomplete: "new-password", placeholder: 'Repeat password *', id: "form-field" 
+      = f.submit "Sign up", class: "btn btn-light sign-up-btn mt-4"
+      %p
+        Already have an account? 
+        = link_to "Log in", new_session_path(resource_name), class: "link"

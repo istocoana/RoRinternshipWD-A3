@@ -1,0 +1,10 @@
+.btn{
+  background-color: rgb(242, 148, 86);
+  border: none;
+  &:focus{
+    background-color: rgb(230, 123, 52);
+  }
+  &:hover{
+    background-color: rgb(230, 123, 52);
+  }
+} 

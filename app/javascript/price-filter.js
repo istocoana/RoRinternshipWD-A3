@@ -68,25 +68,5 @@
   //       console.error('Error:', error);
   //     });
   // }
-  
-var bar = document.getElementById("bar-scroll");
-var sticky = bar.offsetTop;
 
-window.onscroll = function () {
-  stickyBar();
-};
-
-function stickyBar() {
-  if (window.pageYOffset >= sticky) {
-    bar.style.position = "fixed";
-    bar.style.top = "0";
-    bar.style.width = "100%";
-    bar.style.zIndex = "100";
-  } else {
-    bar.style.position = "";
-    bar.style.top = "";
-    bar.style.width = "";
-    bar.style.zIndex = "";
-  }
-}
 
