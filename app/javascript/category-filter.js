@@ -98,4 +98,3 @@ function applyFilters(){
   form.submit();
 }
 
-
