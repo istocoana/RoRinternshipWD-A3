@@ -61,28 +61,25 @@
     text-align: center;
     margin: 5px;
   }
-
-  .link{
-    text-decoration: none;
-    color: rgb(242, 148, 86);
-    &:hover{
-      color:rgb(230, 123, 52);
-      text-decoration: underline;
-    }
+  
+  p.comments{
+    font-size: 13px;
   }
+
 }
 
 .field_with_errors{
   width: 100%;
+
   input {
     width: 100%;
- }
- [type="radio"]{
+  }
+
+  [type="radio"]{
     width: 17px;
- }
+  }
 }
 
 .alert-danger{
   font-size: 13px;
 }
-

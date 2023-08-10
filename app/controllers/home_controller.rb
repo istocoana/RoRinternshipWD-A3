@@ -4,6 +4,5 @@ class HomeController < ApplicationController
   
     @selected_category = params[:category] || "Category"
     @vegetarian = params[:vegetarian] || 'Vegetarian'
-
   end
 end
