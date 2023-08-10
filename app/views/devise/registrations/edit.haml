@@ -3,7 +3,6 @@
 
 - provide(:title, "Edit your account")
 
-
 .container 
   %h2.form-header Edit Your Account
   = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
@@ -13,11 +12,7 @@
       - if devise_mapping.confirmable? && resource.pending_reconfirmation?
         %p
           Currently waiting confirmation for: #{ resource.unconfirmed_email }
-      %p.comments
         %strong
-          = @minimum_password_length 
-          characters minimum
-        %br/
         (leave blank if you don't want to change it)
       = f.password_field :password, autocomplete: "new-password", placeholder: "New password"
       
