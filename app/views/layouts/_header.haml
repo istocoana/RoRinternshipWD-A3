@@ -20,9 +20,19 @@
     %i.bi.bi-circle-fill
     = link_to "Contacts", "/contacts"
     - if user_signed_in?
+      - if current_user.role == 'customer'
+        %i.bi.bi-circle-fill
+        = link_to 'My Profile', user_profile_path 
+        %i.bi.bi-circle-fill 
+        = link_to 'Cart', cart_path
+        %i.bi.bi-circle-fill
+        = link_to 'Orders', orders_page_path
+      -elsif current_user.role == "admin"
+        %i.bi.bi-circle-fill
+        = link_to "Products", '#'
       %i.bi.bi-circle-fill
       = link_to "Sign out", destroy_user_session_path, method: :delete, 'data-turbo-method': :delete    
-      = link_to 'My Profile', user_profile_path
+
     - else
       %i.bi.bi-circle-fill
       = link_to "Sign up", new_user_registration_path

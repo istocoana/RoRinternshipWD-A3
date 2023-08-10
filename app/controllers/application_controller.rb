@@ -1,5 +1,9 @@
 class ApplicationController < ActionController::Base
+  skip_before_action :verify_authenticity_token
   before_action :store_location
+  # before_action :authenticate_user!
+  
+  
   def store_location
     unless params[:controller] == "devise/sessions"
       url = root_path

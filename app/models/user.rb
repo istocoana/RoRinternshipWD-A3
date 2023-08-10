@@ -4,6 +4,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   has_one :profile
+  has_many :orders, class_name: "Order"
 
   validates :email, presence: true
   validates :password, presence: true, confirmation: true
