@@ -1,5 +1,8 @@
 = javascript_include_tag 'category-filter'
 = javascript_include_tag 'price-filter', defer: true
+= javascript_include_tag 'cart'
+= stylesheet_link_tag 'cart'
+= stylesheet_link_tag 'buttons'
 
 - provide(:title, "Home")
 
@@ -14,39 +17,58 @@
         more.    
 
   .bar#bar-scroll 
-    .categories  
-      %form{ action: "/", method: "get", id: "filter_form"} 
-        .dropdown
-          %div{ onclick: "toggleDropdownMenu('dropdown-content1', 'arrow1')" }
-            %span#selected= @selected_category 
-            %i#arrow1.bi.bi-caret-down-fill
-          .dropdown-content#dropdown-content1
-            %a#show-all{ href: "#", onclick: "submitFormWithCategory('Category')" } Show All
-            - Product.categories.keys.each do |category|
-              %a{ href: "#", onclick: "submitFormWithCategory('#{category}')" }= category.humanize
+    .filter-bar
+      .categories  
+        %form{ action: "/", method: "get", id: "filter_form"} 
+          .dropdown
+            %div{ onclick: "toggleDropdownMenu('dropdown-content1', 'arrow1')" }
+              %span#selected= @selected_category 
+              %i#arrow1.bi.bi-caret-down-fill
+            .dropdown-content#dropdown-content1
+              %a#show-all{ href: "#", onclick: "submitFormWithCategory('Category')" } Show All
+              - Product.categories.keys.each do |category|
+                %a{ href: "#", onclick: "submitFormWithCategory('#{category}')" }= category.humanize
+            
+          .dropdown
+            %div{ onclick: "toggleDropdownMenu('dropdown-content2', 'arrow2')" }
+              %span#vegetarian=  @vegetarian 
+              %i#arrow2.bi.bi-caret-down-fill
+            .dropdown-content#dropdown-content2
+              %a{ href: "#", onclick: "submitFormWithVegetarian('Vegetarian')" } Show All
+              %a{ href: "#", onclick: "submitFormWithVegetarian(true, 'Is Vegetarian')" } 
+                Vegetarian
+              %a{ href: "#", onclick: "submitFormWithVegetarian(false, 'Non-vegetarian')" } 
+                Non-vegetarian
+          = hidden_field_tag :category, params[:category]
+          = hidden_field_tag :vegetarian, params[:vegetarian]
 
-        .dropdown
-          %div{ onclick: "toggleDropdownMenu('dropdown-content2', 'arrow2')" }
-            %span#vegetarian=  @vegetarian 
-            %i#arrow2.bi.bi-caret-down-fill
-          .dropdown-content#dropdown-content2
-            %a{ href: "#", onclick: "submitFormWithVegetarian('Vegetarian')" } Show All
-            %a{ href: "#", onclick: "submitFormWithVegetarian(true, 'Is Vegetarian')" } 
-              Vegetarian
-            %a{ href: "#", onclick: "submitFormWithVegetarian(false, 'Non-vegetarian')" } 
-              Non-vegetarian
-        = hidden_field_tag :category, params[:category]
-        = hidden_field_tag :vegetarian, params[:vegetarian]
+      .price-filter
+        %p#min-slider
+        #uislider
+        %p#max-slider
+      
+      .button-container
+        %button{ type: "button", onclick: "applyFilters()" } Apply Filters
+  
+    - if user_signed_in? 
+      - if current_user.role == 'customer'
+        - user_orders = current_user.orders.includes(:order_items, :products).where(status: ['pending', 'processing'])
+        - if user_orders.present?
+          .cart
+            %i.bi.bi-basket3-fill{ onclick: "toggleCart()"}
+            %span#cart-count.cart-count
+            #cart-container.cart-container
+              %h6 Cart
+              - user_orders.each do |order|
+                %ul
+                - order.order_items.each do |item| 
+                  %li
+                    = item.product.title
+                    #{item.product.price}
+                %p
+                  = order.status
+                  = link_to 'View Cart', cart_path
         
-    .price-filter
-      %p#min-slider
-      #uislider
-      %p#max-slider
-    
-    .button-container
-      %button{ type: "button", onclick: "applyFilters()" } Apply Filters
-     
-
   .menu
     - @products.each do |product|
       .food-item#filtered-results{ "data-price" => product.price }
@@ -64,5 +86,13 @@
             - else
               %p= product.description
         .food-price
-          %p Price: $#{product.price}
-      
+          %p 
+            Price: $#{product.price}
+            %br/
+            - if user_signed_in?
+              - if current_user.role == "customer"
+                %a.add-to-cart{href: add_to_cart_path(product_id: product.id), method: :post}
+                  %i.bi.bi-basket3-fill
+              - elsif current_user.role == "admin"
+                = link_to "Edit product", '#'
+

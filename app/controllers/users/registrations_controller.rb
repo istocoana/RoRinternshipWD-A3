@@ -1,7 +1,5 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-  skip_before_action :verify_authenticity_token
-  
-  def new
+    def new
     build_resource({})
     resource.build_profile
     respond_with resource

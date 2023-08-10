@@ -16,6 +16,7 @@ class ProfilesController < ApplicationController
   def show
     @user = current_user
     @profile = current_user.profile
+    @orders = current_user.orders
     unless @profile
       redirect_to new_profile_path, alert: "Please complete your profile first."
     end

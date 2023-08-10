@@ -1,0 +1,13 @@
+%h1 Order Details
+%p
+  %strong Order ID:
+  = @order.id
+%p
+  %strong Status:
+  = @order.status
+%ul
+  - @order.order_items.each do |item|
+    %li
+      = item.product.title
+      = item.product.price
+= link_to 'Back', :back

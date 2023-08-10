@@ -9,8 +9,17 @@ Rails.application.routes.draw do
   get "/product", to: "products#product"
   get '/services/product_filter_service', to: 'product_filter_service#filter'
 
-  resources :profiles, only: [:new, :create, :edit, :update]
   get 'profile', to: 'profiles#show', as: :user_profile
   get 'profile_updated', to: 'profiles#updated', as: :profile_updated
+  get 'add_to_cart/:product_id', to: 'orders#create', as: 'add_to_cart'
+  get 'cart', to: 'orders#cart'
+  post 'complete_order', to: 'orders#complete_order', as: 'complete_order'
+  get 'completed_orders', to: 'orders#completed_orders', as: 'completed_orders'
+  get "orders_page", to: "orders#orders_page", as: "orders_page"
+
+
+  resources :orders, only: [:show]
+  resources :products, only: [:index, :show]
+  resources :profiles, only: [:new, :create, :edit, :update]
 
 end

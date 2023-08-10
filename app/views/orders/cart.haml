@@ -1,0 +1,18 @@
+#success-message{ style: 'display: none;' }
+  %p Product added to cart!
+  
+%h1 Your Cart
+- @orders.each do |order|
+  - if notice.present?
+    .notice= notice
+  .order
+    %ul
+    - order.order_items.each do |item|
+      %li
+        = item.product.title
+        #{item.product.price}
+    %p
+      = order.status
+      = link_to 'View Order', order_path(order)
+      = link_to 'Order', complete_order_path, method: :post, class: 'btn btn-success'
+
