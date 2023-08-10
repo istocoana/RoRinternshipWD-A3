@@ -1,5 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-
+  skip_before_action :verify_authenticity_token
+  
   def new
     build_resource({})
     resource.build_profile
@@ -37,5 +38,4 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def sign_up_params
     params.require(:user).permit(:email, :password, :password_confirmation, :role)
   end
-
 end
