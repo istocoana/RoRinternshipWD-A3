@@ -1,13 +1,24 @@
-%h1 Order Details
-%p
-  %strong Order ID:
-  = @order.id
-%p
-  %strong Status:
-  = @order.status
-%ul
-  - @order.order_items.each do |item|
-    %li
-      = item.product.title
-      = item.product.price
-= link_to 'Back', :back
+= stylesheet_link_tag "orders"
+= stylesheet_link_tag "buttons"
+
+- provide(:title, "Order " + "#" + "#{ @order.id }")
+
+.container
+  .order-item
+    .order-header
+      %h1 
+        %strong 
+        Order #
+        = @order.id
+      %p
+        %strong Status:
+        %span= @order.status
+      .order-products
+        %p
+          %strong Products:
+        %ol
+          - @order.order_items.each do |item|
+            %li
+              = item.product.title
+              = item.product.price
+  = link_to 'Back', :back, class: "back-link"

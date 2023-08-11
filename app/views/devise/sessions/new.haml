@@ -2,6 +2,8 @@
 = javascript_include_tag "form"
 = stylesheet_link_tag "buttons"
 
+- provide(:title, "Log in")
+
 .container
   %h2.form-header Log in
   = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|

@@ -1,6 +1,6 @@
 class Order < ApplicationRecord
   belongs_to :user
-  has_many  :order_items
+  has_many  :order_items, dependent: :destroy
   has_many  :products, through: :order_items
 
   validates :user_id, presence: true
@@ -13,6 +13,10 @@ class Order < ApplicationRecord
     processing: 1,
     completed: 2
   }
+
+  def total_price 
+    order_items.sum { |item| item.product.price * item.quantity }  
+  end
 
   private
 

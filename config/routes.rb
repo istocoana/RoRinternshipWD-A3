@@ -17,7 +17,11 @@ Rails.application.routes.draw do
   get "orders_page", to: "orders#orders_page", as: "orders_page"
 
 
-  resources :orders, only: [:show]
+  resources :orders, only: [:show] do
+    collection do
+      delete 'remove_from_cart/:order_item_id', action: :remove_from_cart, as: :remove_from_cart
+    end
+  end
   resources :products, only: [:index, :show]
   resources :profiles, only: [:new, :create, :edit, :update]
 

@@ -1,7 +1,7 @@
 = stylesheet_link_tag "profile"
 = stylesheet_link_tag "buttons"
 
-- provide(:title, "#{@profile.first_name}")
+- provide(:title, "#{ @profile.first_name }")
 
 .container
   .profile-details
@@ -48,4 +48,6 @@
 
   .edit-actions
     = link_to 'Edit Profile', edit_profile_path(@profile), class: 'btn btn-primary'
-    = link_to 'Destroy', user_registration_path, :confirm => 'Are you sure you want to destroy your account?', :method => :delete, class: "back-link"
+    = link_to "Cancel my account", registration_path(current_user), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: "link"
+
+    

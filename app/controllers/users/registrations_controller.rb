@@ -7,23 +7,22 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
     build_resource(sign_up_params)
-
+  
     if resource.valid? && resource.save
       if resource.role == 'customer'
         sign_up(resource_name, resource)
         set_flash_message! :notice, :signed_up
-        redirect_to new_profile_path
-      else
-        sign_up(resource_name, resource)
-        set_flash_message! :notice, :signed_up
-        redirect_to root_path
+        redirect_path = resource.role == 'customer' ? new_profile_path : root_path
+        redirect_to redirect_path and return
       end
-    else
-      clean_up_passwords(resource)
-      set_minimum_password_length
-      respond_with resource
     end
+  
+    clean_up_passwords(resource)
+    set_minimum_password_length
+    respond_with resource
   end
+  
+  
 
   protected
 

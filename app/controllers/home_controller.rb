@@ -7,5 +7,6 @@ class HomeController < ApplicationController
     @vegetarian = params[:vegetarian] || 'Vegetarian'
 
     @orders = Order.all
+   
   end
 end

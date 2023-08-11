@@ -1,24 +1,24 @@
-.btn{
+.btn {
   background-color: rgb(242, 148, 86);
   border: none;
-  &:focus{
+  &:focus {
     background-color: rgb(230, 123, 52);
   }
-  &:hover{
+  &:hover {
     background-color: rgb(230, 123, 52);
   }
 } 
 
-.link{
+.link {
   text-decoration: none;
   color: rgb(242, 148, 86);
-  &:hover{
+  &:hover {
     color:rgb(230, 123, 52);
     text-decoration: underline;
   }
 }
 
-.back-link{
+.back-link {
   text-decoration: none;
   color: gray;
   
@@ -34,7 +34,7 @@
   border: none;
   border-radius: 10px;
   padding: 6px;
-  &:hover{
+  &:hover {
     color: #1d1b1b;
   }
 }
