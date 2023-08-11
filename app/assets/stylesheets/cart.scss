@@ -37,14 +37,6 @@
   list-style: none;
 }
 
-.cart-container button {
-  background-color: rgb(195, 195, 195);
-  border: none;
-  border-radius: 5px;
-  color: white;
-  margin-left: 10px;
-}
-
 .cart-container h6 {
   color: rgba(242, 148, 86, 255);
   font-weight: bold;
@@ -66,5 +58,19 @@
   font-size: 8px;
   padding: 2.5px 6px;
   border-radius: 50%;
-  display: none;
 }
+
+.cart-container a {
+  color: black;
+  font-size: 16px;
+  text-decoration: none;
+  &:hover{
+    color: gray;
+  }
+
+  .bi-trash-fill::before {
+    margin-bottom: 7px;
+  }
+}
+
+

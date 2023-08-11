@@ -3,6 +3,7 @@
 = javascript_include_tag 'cart'
 = stylesheet_link_tag 'cart'
 = stylesheet_link_tag 'buttons'
+= stylesheet_link_tag "products_images"
 
 - provide(:title, "Home")
 
@@ -57,17 +58,27 @@
           .cart
             %i.bi.bi-basket3-fill{ onclick: "toggleCart()"}
             %span#cart-count.cart-count
+              = user_orders.sum { |order| order.order_items.sum(:quantity) }
             #cart-container.cart-container
               %h6 Cart
               - user_orders.each do |order|
-                %ul
-                - order.order_items.each do |item| 
-                  %li
-                    = item.product.title
-                    #{item.product.price}
+                %ol
+                  - order.order_items.each do |item| 
+                    %li
+                      = item.product.title
+                      $#{ item.product.price * item.quantity }
+                      %span{ style: 'color: grey' }
+                        Q: 
+                        = item.quantity
+                      %span
+                        %a.remove-link{ href: remove_from_cart_orders_path(order_item_id: item.id), 'data-confirm': 'Are you sure you want to remove this product from your cart?', 'data-method': 'delete' }
+                          %i.bi.bi-trash-fill
+                %p 
+                  Total Price: 
+                  %strong $#{ order.total_price }
                 %p
-                  = order.status
-                  = link_to 'View Cart', cart_path
+                  = link_to 'View Cart', cart_path, class: "link"
+
         
   .menu
     - @products.each do |product|
@@ -87,11 +98,11 @@
               %p= product.description
         .food-price
           %p 
-            Price: $#{product.price}
+            Price: $#{ product.price }
             %br/
             - if user_signed_in?
               - if current_user.role == "customer"
-                %a.add-to-cart{href: add_to_cart_path(product_id: product.id), method: :post}
+                %a.add-to-cart{ href: add_to_cart_path(product_id: product.id), method: :post }
                   %i.bi.bi-basket3-fill
               - elsif current_user.role == "admin"
                 = link_to "Edit product", '#'

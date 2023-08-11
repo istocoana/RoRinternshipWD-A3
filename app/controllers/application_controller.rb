@@ -6,8 +6,7 @@ class ApplicationController < ActionController::Base
   
   def store_location
     unless params[:controller] == "devise/sessions"
-      url = root_path
-      session[:user_return_to] = url
+      session[:user_return_to] = root_path unless params[:controller] == "devise/sessions"
     end
   end
 
