@@ -1,0 +1,68 @@
+= stylesheet_link_tag 'products'
+= stylesheet_link_tag 'buttons'
+
+- provide(:title, "Manage your products")
+
+.container
+  %h2.products-header Manage Your Products
+  .products-header-bar
+    %h6                                                                     
+      Total Products:                                                       
+      = @products.count                                                     
+    %a.btn.btn-sm.edit-product#tooltip{ href: new_product_path,  title: 'New Product' } 
+      Add a new product                                                     
+  - @products.each do |product|
+    .product
+      .product-photo
+        - if product.photo.attached?
+          = image_tag rails_blob_path(product.photo, only_path: true, width: 200)
+        - else
+          %p No photo available
+      .product-details
+        %h5
+          %strong 
+            = product.title
+            = "##{ product.id }"
+        %p.description
+          %strong Description: 
+          = product.description
+        %p.price
+          %strong Price:
+          = "$#{product.price}"
+        %p.vegetarian
+          %strong
+            Vegetarian: 
+          = product.vegetarian ? 'Yes' : 'No'
+        %p.category
+          %strong Category:
+          = product.category.humanize
+        .admin-details
+          %p.managed_by
+            %strong Added by: 
+            %br/
+            ID:
+            = @user.id 
+            %br/
+            e-mail:
+            = @user.email
+            %br/
+            role:
+            = @user.role
+          - if product.edited_by.present?
+            %p.edited_by
+              %strong Last edited by:
+              %br/
+              ID:
+              = product.edited_by
+              %br/
+              - if User.exists?(product.edited_by)
+                = User.find(product.edited_by).email
+                %br/
+                role:
+                = User.find(product.edited_by).role
+              - else
+                = 'User deleted'
+        %p.actions
+          = link_to 'View', product_path(product), class: 'btn btn-sm btn-primary'
+          = link_to 'Edit', edit_product_path(product), class: 'btn btn-sm btn-secondary'
+          = link_to 'Delete', product_path(product), method: :delete, data: { confirm: 'Are you sure you want to delete this product?' }, class: 'btn btn-sm btn-danger'

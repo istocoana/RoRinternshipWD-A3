@@ -1,24 +1,24 @@
-.btn{
+.button {
   background-color: rgb(242, 148, 86);
   border: none;
-  &:focus{
+  &:focus {
     background-color: rgb(230, 123, 52);
   }
-  &:hover{
+  &:hover {
     background-color: rgb(230, 123, 52);
   }
 } 
 
-.link{
+.link {
   text-decoration: none;
   color: rgb(242, 148, 86);
-  &:hover{
+  &:hover {
     color:rgb(230, 123, 52);
     text-decoration: underline;
   }
 }
 
-.back-link{
+.back-link {
   text-decoration: none;
   color: gray;
   
@@ -27,3 +27,37 @@
     text-decoration: underline;
   }
 }
+
+.add-to-cart {
+  color: #333;
+  font-size: 20px;
+  border: none;
+  border-radius: 10px;
+  padding: 6px;
+  &:hover {
+    color: #1d1b1b;
+  }
+}
+
+.edit-product {
+  background-color: rgb(137, 179, 204);
+  border: none;
+  color: white;
+  &:focus {
+    background-color: rgb(115, 157, 182);
+    color: white;
+  }
+  &:hover {
+    color: white;
+    background-color: rgb(115, 157, 182);
+  }
+} 
+
+.new-product {
+  font-size: 20px;
+  color:  rgb(137, 179, 204);
+  &:hover {
+    color: rgb(115, 157, 182);
+  }
+}
+

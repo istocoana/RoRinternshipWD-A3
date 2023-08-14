@@ -85,10 +85,17 @@ function submitFormWithVegetarian(isVegetarian, text) {
   vegetarian.innerHTML = text;
 }
 
+function submitFormWithSorting(orderBy) {
+  var form = document.getElementById('filter_form');
+  let sorting = document.getElementById("sorting");
+  form.order_by.value = orderBy;
+  sorting.innerHTML = orderBy === '' ? 'Sorting' : orderBy.charAt(0).toUpperCase() + orderBy.slice(1) + ' Ascending';
+}
+
 
 function applyFilters(){
   var form = document.getElementById('filter_form');
   form.submit();
-  
 }
+
 

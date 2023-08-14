@@ -1,33 +1,33 @@
-.container{
+.container {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   margin-top: 30px;
   border-radius: 10px;
   width: 40%;
   padding: 30px;
 
-  p{
+  p {
     text-align: start;
   }
   
-  h2{
+  h2 {
     margin-bottom: 20px;
   }
 }
 
-.profile-name{
+.profile-name {
   display: inline;
   color: rgb(242, 148, 86);
 }
 
-p{
+p {
   margin: 5px 10px;
 }
 
-h5{
+h5 {
   margin: 20px 0 10px 0;
 }
 
-.edit-actions{
+.edit-actions {
   margin-top: 20px;
   display: flex;
   gap: 20px;
