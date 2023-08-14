@@ -4,6 +4,7 @@
 = stylesheet_link_tag 'cart'
 = stylesheet_link_tag 'buttons'
 = stylesheet_link_tag "products_images"
+= stylesheet_link_tag "index"
 
 - provide(:title, "Home")
 
@@ -23,7 +24,7 @@
         %form{ action: "/", method: "get", id: "filter_form"} 
           .dropdown
             %div{ onclick: "toggleDropdownMenu('dropdown-content1', 'arrow1')" }
-              %span#selected= @selected_category 
+              %span#selected= @selected_category.presence || "Category"
               %i#arrow1.bi.bi-caret-down-fill
             .dropdown-content#dropdown-content1
               %a#show-all{ href: "#", onclick: "submitFormWithCategory('Category')" } Show All
@@ -32,7 +33,7 @@
             
           .dropdown
             %div{ onclick: "toggleDropdownMenu('dropdown-content2', 'arrow2')" }
-              %span#vegetarian=  @vegetarian 
+              %span#vegetarian= @vegetarian.presence || "Vegetarian"
               %i#arrow2.bi.bi-caret-down-fill
             .dropdown-content#dropdown-content2
               %a{ href: "#", onclick: "submitFormWithVegetarian('Vegetarian')" } Show All
@@ -78,11 +79,12 @@
                   %strong $#{ order.total_price }
                 %p
                   = link_to 'View Cart', cart_path, class: "link"
+      - elsif current_user.role == "admin"
+        = link_to "New Product", new_product_path
 
-        
   .menu
     - @products.each do |product|
-      .food-item#filtered-results{ "data-price" => product.price }
+      .item#filtered-results{ "data-price" => product.price }
         .food-image
           - if product.photo.attached?
             = image_tag product.photo, class: "food-image"
@@ -99,11 +101,12 @@
         .food-price
           %p 
             Price: $#{ product.price }
-            %br/
-            - if user_signed_in?
-              - if current_user.role == "customer"
-                %a.add-to-cart{ href: add_to_cart_path(product_id: product.id), method: :post }
-                  %i.bi.bi-basket3-fill
-              - elsif current_user.role == "admin"
-                = link_to "Edit product", '#'
+          - if user_signed_in?
+            - if current_user.role == "customer"
+              %a.add-to-cart{ href: add_to_cart_path(product_id: product.id), method: :post }
+                %i.bi.bi-basket3-fill
+            - elsif current_user.role == "admin"
+              = link_to "Edit product", edit_product_path(product)
+
+
 

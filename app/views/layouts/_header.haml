@@ -29,7 +29,9 @@
         = link_to 'Orders', orders_page_path
       -elsif current_user.role == "admin"
         %i.bi.bi-circle-fill
-        = link_to "Products", '#'
+        = link_to "Products", products_path
+        %i.bi.bi-circle-fill
+        = link_to "Orders", admin_orders_path
       %i.bi.bi-circle-fill
       = link_to "Sign out", destroy_user_session_path, method: :delete, 'data-turbo-method': :delete    
 

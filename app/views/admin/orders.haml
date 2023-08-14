@@ -1,0 +1,29 @@
+- if notice.present?
+  .notice.alert.alert-success= notice
+- elsif alert.present?
+  .alert.alert-danger= alert
+
+%h1 Admin Orders
+
+%table
+  %thead
+    %tr
+      %th User
+      %th Order Date
+      %th Status
+      %th Total Price
+      %th Completed Order Date
+
+  %tbody
+    - @orders.each do |order|
+      %tr
+        %td= order.user.email
+        %td= order.order_date
+        %td= order.status
+        %td= order.total_price
+        %td 
+          - if order.status != "handled" && order.status == "completed"
+            = link_to "Mark as Handled", handle_order_path(order), method: :patch
+        %td= order.completed_order_date
+
+
