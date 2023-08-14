@@ -1,0 +1,18 @@
+= stylesheet_link_tag "form"
+= stylesheet_link_tag "buttons"
+
+- provide(:title, "Create a profile")
+
+.container
+  %h2.form-header Create your profile
+  .profile-form
+    = form_for(@profile) do |f|
+      .form-field
+        = f.text_field :first_name, placeholder: 'First name *'
+        = f.text_field :last_name, placeholder: 'Last name *'
+        = f.text_field :phone, placeholder: 'Phone *'
+        = f.text_field :street_address, placeholder: 'Street Address *'
+        = f.text_field :city, placeholder: 'City *'
+        = f.text_field :county, placeholder: 'County *'
+        = f.submit "Complete Profile", class: "btn"
+

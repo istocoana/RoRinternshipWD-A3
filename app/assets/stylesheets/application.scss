@@ -1,19 +1,6 @@
-//= require_tree .
 //= require_self
 
 @import "header";
 @import "index";
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import "footer";
 
-* {
-  font-family: "Poppins", sans-serif;
-}
-
-body {
-  width: 100%;
-}
-
-.header {
-  width: 100%;
-}

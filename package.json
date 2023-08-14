@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "bootstrap": "^5.3.1",
-    "bootstrap-icons": "^1.10.5"
+    "bootstrap-icons": "^1.10.5",
+    "nouislider": "^15.7.1",
+    "toastr": "^2.1.4"
   }
 }

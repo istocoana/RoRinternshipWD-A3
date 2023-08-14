@@ -1,0 +1,11 @@
+= stylesheet_link_tag "errors"
+
+- if resource.errors.any?
+  #error_explanation{"data-turbo-cache" => "false"}
+    %ul.alert.alert-danger
+      - resource.errors.full_messages.each do |message|
+        %li
+          %i.bi.bi-exclamation
+          = message
+
+

@@ -1,0 +1,98 @@
+= stylesheet_link_tag "admin_orders"
+= stylesheet_link_tag "buttons"
+= javascript_include_tag 'admin'
+
+
+:javascript
+  var orderCounts = #{@order_counts};
+
+- provide(:title, "Orders")
+
+.container
+  %h1.order-header Manage Orders
+  .order-by
+    %form
+      %label
+        Order by:
+        %select{ name: "order_by" }
+          %option{ value: "status" } Status
+          %option{ value: "price" } Price
+          %option{ value: "order_date" } Order Date
+          %option{ value: "order_date" } User ID
+      %button.btn.button.btn-sm{ type: "submit" } Sort
+
+  .table
+    %table.table.table-striped.table-hover
+      %thead.thead-dark
+        %tr
+          %th User ID
+          %th Email User
+          %th Order Items
+          %th Total Price
+          %th Order Date
+          %th Status
+          %th Completed Order Date
+          %th 
+
+      %tbody
+        - @orders.each do |order|
+          %tr
+            %th= order.user.id
+            %td= order.user.email
+            %td#order-items-count
+              .clickable#tooltip{ "data-order-id" => order.id, title: "View Products" } 
+                = order.order_items.count
+              .product-list{ "data-order-id" => order.id, style: "display: none;" }
+                - order.order_items.each do |order_item|
+                  %p= "#{ order_item.product.title } - #{ order_item.product.price }"
+            %td= order.total_price
+            %td= order.order_date
+            - if order.status == "handled"
+              %td{ style: "color: rgb(128, 183, 201)" }
+                = order.status
+            - elsif order.status == "pending"
+              %td{ style: "color: darkgray" }
+                = order.status
+            - elsif order.status == "processing"
+              %td{ style: "color: rgb(255, 221, 129)" }
+                = order.status
+            - elsif order.status == "completed"
+              %td{ style: "color: rgb(141, 207, 141)" }
+                = order.status
+            %td= order.completed_order_date
+            %td 
+              - if order.status != "handled" && order.status == "completed"
+                = link_to "Mark as Handled", handle_order_path(order), method: :patch, class: "link"
+
+  .total
+    %p 
+      %strong
+        Total orders: 
+      = @orders.count
+    %p 
+      %strong
+        Users: 
+      = @orders.map(&:user).uniq.size
+    %p 
+      %strong
+        Total Price of All Orders:
+      = number_to_currency(@orders.sum(&:total_price))
+    %p 
+      %strong 
+        Count of Orders by Status:
+      - order_counts = @orders.group_by(&:status).transform_values(&:count)
+      %table.table.table-striped.table-hover.table-sm
+        %thead.thead-dark
+          %tr
+            %th Status
+            %th Count
+
+        %tbody
+          - order_counts.each do |status, count|
+            %tr
+              %td= status
+              %td= count
+
+
+
+

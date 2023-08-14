@@ -1,3 +1,19 @@
-// Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
-import "@hotwired/turbo-rails"
-import "controllers"
+//= require rails-ujs
+//= require jquery
+//= require toastr.min
+
+$(document).ready(function() {
+  var notice = $('.notice').data('notice');
+  var alert = $('.alert').data('alert');
+
+  toastr.options = {
+    positionClass: 'toast-top-left',
+  };
+  
+  if (notice) {
+    toastr.success(notice);
+  } else if (alert) {
+    toastr.error(alert);
+  }
+
+});

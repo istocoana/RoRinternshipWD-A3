@@ -1,0 +1,60 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  padding: 30px;
+  margin-top: 30px;
+  border-radius: 10px;
+}
+
+.clickable {
+  cursor: pointer;
+  font-weight: 550;
+  color: #1b1b1b;
+  &:hover {
+    color: rgb(137, 179, 204);
+    text-decoration: underline;
+  }
+}
+
+.product-list {
+  font-size: 13px;
+  
+  p {
+    margin: 0;
+  }
+}
+
+td#order-items-count {
+  width: 200px;  
+}
+
+.order-by {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  gap: 20px;
+
+  select {
+    padding: 7px 10px;
+    height: 20%;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+  }
+
+   select:focus {
+    border: 1.5px solid rgba(242, 148, 86, 255);
+  }
+  
+}
+
+.order-header{
+  font-weight: bold;
+}
+
+.total table {
+  width: 50%;
+}
