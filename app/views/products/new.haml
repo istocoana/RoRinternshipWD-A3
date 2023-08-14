@@ -1,0 +1,44 @@
+- if notice.present?
+  .notice.alert.alert-success= notice
+- elsif alert.present?
+  .alert.alert-danger= alert
+
+%h1 New Product
+
+= form_for @product, url: products_path, method: :post, html: { multipart: true } do |f|
+  .field
+    = f.label :title
+    = f.text_field :title, class: 'form-control'
+    - if @product.errors.has_key?(:title)
+      %p.text-danger= @product.errors[:title].first
+  
+  .field
+    = f.label :description
+    = f.text_area :description, class: 'form-control'
+    - if @product.errors.has_key?(:description)
+      %p.text-danger= @product.errors[:description].first
+  
+  .field
+    = f.label :price
+    = f.text_field :price, class: 'form-control'
+    - if @product.errors.has_key?(:price)
+      %p.text-danger= @product.errors[:price].first
+  
+  .field
+    = f.label :vegetarian
+    = f.select :vegetarian, options_for_select([['Yes', true], ['No', false]], @product.vegetarian), class: 'form-select'
+
+  .field
+    = f.label :category
+    = f.select :category, Product.categories.keys.map { |c| [c.humanize, c] }, class: 'form-select'
+    - if @product.errors.has_key?(:category)
+      %p.text-danger= @product.errors[:category].first
+  
+  .field
+    = f.label :photo
+    = f.file_field :photo
+  
+  .actions
+    = f.submit 'Create Product', class: 'btn btn-primary'
+  
+= link_to 'Back', :back , class: 'btn btn-secondary'

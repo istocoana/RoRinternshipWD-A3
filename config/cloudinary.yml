@@ -1,0 +1,15 @@
+development:
+  cloud_name: 'drlqrnef9'
+  api_key: '611547821925637'
+  api_secret: "1858utRFmrz8SjAFOqps6-wuzUg"
+  
+production:
+  cloud_name: 'drlqrnef9'
+  api_key: '611547821925637'
+  api_secret: "1858utRFmrz8SjAFOqps6-wuzUg"
+
+test:
+  cloud_name: 'drlqrnef9'
+  api_key: '611547821925637'
+  api_secret: "1858utRFmrz8SjAFOqps6-wuzUg"
+

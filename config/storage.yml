@@ -1,7 +1,11 @@
 test:
   service: Disk
-  root: <%= Rails.root.join("public/uploads") %>
+  root: = Rails.root.join("public/uploads") 
 
 local:
   service: Disk
-  root: <%= Rails.root.join("public/uploads") %>
+  root: = Rails.root.join("public/uploads") 
+
+cloudinary:
+  service: Cloudinary
+  folder: ulpoads

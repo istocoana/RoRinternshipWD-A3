@@ -3,25 +3,40 @@ class OrdersController < ApplicationController
   def create
     @product = Product.find(params[:product_id])
     order
-    existing_order_item = @order.order_items.find_by(product: @product)
   
-    if existing_order_item
-      existing_order_item.quantity += 1
-      if existing_order_item.save
-        redirect_to root_path, notice: 'Product added to cart.'
+    begin
+      if @product
+        existing_order_item = @order.order_items.find_by(product: @product)
+      
+        if existing_order_item
+          existing_order_item.quantity += 1
+          if existing_order_item.save
+            redirect_to root_path, notice: 'Product added to cart.'
+          else
+            redirect_to root_path, notice: 'Error updating cart.'
+          end
+        else
+          @order_item = @order.order_items.new(product: @product, quantity: 1, out_of_stock: false)
+          if @order_item.save
+            redirect_to root_path, notice: 'Product added to cart.'
+          else
+            redirect_to root_path, notice: "Error adding product to cart."
+          end
+        end
       else
-        redirect_to root_path, notice: 'Error'
+        redirect_to root_path, notice: 'Product not found.'
       end
-    else
-      @order_item = @order.order_items.new(product: @product, quantity: 1)
-      if @order_item.save
-        redirect_to root_path, notice: 'Product added to cart.'
-      else
-        redirect_to root_path, notice: 'Error'
-      end
+    rescue => ex
+      redirect_to root_path, notice: "Error adding product to cart: #{ex.message}"
     end
   end
-
+  
+  def handle
+    @order = Order.find(params[:id])
+    @order.update(status: "handled")
+    redirect_to admin_orders_path, notice: "Order has been marked as handled."
+  end
+  
   def cart
     @orders = current_user.orders.includes(:order_items, :products).where(status: ['pending', 'processing'])
     @orders.update_all(status: 'processing') 
@@ -29,12 +44,18 @@ class OrdersController < ApplicationController
 
   def remove_from_cart
     @order_item = OrderItem.find(params[:order_item_id])
-    @order_item.destroy
-
-    if request.referrer == root_path
-      redirect_to original_url, notice: 'Product removed from cart.'
+    
+    if @order_item.quantity > 1
+      @order_item.quantity -= 1
+      @order_item.save
     else
-      redirect_to cart_path, notice: 'Product removed from cart.'
+      @order_item.destroy
+    end
+  
+    if request.referrer == root_path
+      redirect_to original_url, notice: 'Product quantity decreased in cart.'
+    else
+      redirect_to cart_path, notice: 'Product quantity decreased in cart.'
     end
   end
 
@@ -71,5 +92,16 @@ class OrdersController < ApplicationController
     end
   end
 
+  def mark_order_item_as_out_of_stock(product)
+    orders_to_update = Order.processing.includes(:order_items).where(order_items: { product: product })
+
+    orders_to_update.each do |order|
+      order_item = order.order_items.find_by(product: product)
+      order_item&.update(out_of_stock: true)
+    end
+  end
+
 end
+
+
 

@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
+
   def destroy
     @user = User.find(params[:id])
 
-  
     @user.orders.destroy_all
     
     if @user.destroy
@@ -14,4 +14,5 @@ class UsersController < ApplicationController
   
     redirect_to users_path
   end
+
 end

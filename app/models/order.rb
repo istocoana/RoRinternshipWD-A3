@@ -1,6 +1,6 @@
 class Order < ApplicationRecord
   belongs_to :user
-  has_many  :order_items, dependent: :destroy
+  has_many  :order_items
   has_many  :products, through: :order_items
 
   validates :user_id, presence: true
@@ -11,7 +11,8 @@ class Order < ApplicationRecord
   enum status: {
     pending: 0,
     processing: 1,
-    completed: 2
+    completed: 2,
+    handled: 3
   }
 
   def total_price 

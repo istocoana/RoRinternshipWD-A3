@@ -1,0 +1,29 @@
+- if notice.present?
+  .notice.alert.alert-success= notice
+- elsif alert.present?
+  .alert.alert-danger= alert
+
+%h1 Product Details
+%p
+  %strong Title:
+  = @product.title
+%p
+  %strong Description:
+  = @product.description
+%p
+  %strong Price:
+  $#{@product.price}
+%p
+  %strong Vegetarian:
+  = @product.vegetarian? ? 'Yes' : 'No'
+%p
+  %strong Category:
+  = @product.category.humanize
+%p
+  %strong Photo:
+  - if @product.photo.attached?
+    = image_tag @product.photo
+  - else
+    %p No photo available
+%p
+  = link_to 'Back', products_path, class: 'btn btn-secondary'
