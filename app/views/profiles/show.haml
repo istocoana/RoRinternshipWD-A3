@@ -1,0 +1,51 @@
+= stylesheet_link_tag "profile"
+= stylesheet_link_tag "buttons"
+
+- provide(:title, "#{@profile.first_name}")
+
+.container
+  .profile-details
+    - if notice
+      %p.notice.alert.alert-success= notice
+    - if @profile
+      %h2 
+        Hello, 
+        .profile-name=@profile.first_name 
+        !
+      %p
+        %strong First Name: 
+        = @profile.first_name
+      %p
+        %strong Last Name: 
+        = @profile.last_name
+      %p
+        %strong Phone: 
+        = @profile.phone
+      %p
+        %strong Street Address: 
+        = @profile.street_address
+      %p
+        %strong City: 
+        = @profile.city
+      %p
+        %strong County: 
+        = @profile.county
+    - else
+      %p You don't have a profile yet.
+
+  .account-details
+    - if @user 
+      %h5
+        %strong
+          Account details 
+      %p
+        %strong Email: 
+        = current_user.email
+        %br/
+        = link_to 'Change password', edit_user_registration_path, class: "link"
+    - else 
+      %p You don't have an account.
+
+  .edit-actions
+    = link_to 'Edit Profile', edit_profile_path(@profile), class: 'btn btn-primary'
+    = link_to 'Destroy', user_registration_path, :confirm => 'Are you sure you want to destroy your account?', :method => :delete, class: "back-link"

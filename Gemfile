@@ -3,6 +3,14 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.2.2"
 
+gem 'cancancan'
+
+gem 'geocoder', '~> 1.3', '>= 1.3.7'
+
+gem 'devise', '~> 4.9', '>= 4.9.2'
+
+gem "image_processing", '~> 1.2'
+
 gem 'haml-rails', '~> 2.1.0'
 
 gem 'sass-rails', '~> 6.0'
@@ -29,6 +37,7 @@ gem "bootsnap", require: false
 
 
 group :development, :test do
+  gem "byebug"
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
 end
 
