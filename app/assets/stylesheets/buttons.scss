@@ -1,4 +1,4 @@
-.btn {
+.button {
   background-color: rgb(242, 148, 86);
   border: none;
   &:focus {
@@ -38,3 +38,26 @@
     color: #1d1b1b;
   }
 }
+
+.edit-product {
+  background-color: rgb(137, 179, 204);
+  border: none;
+  color: white;
+  &:focus {
+    background-color: rgb(115, 157, 182);
+    color: white;
+  }
+  &:hover {
+    color: white;
+    background-color: rgb(115, 157, 182);
+  }
+} 
+
+.new-product {
+  font-size: 20px;
+  color:  rgb(137, 179, 204);
+  &:hover {
+    color: rgb(115, 157, 182);
+  }
+}
+

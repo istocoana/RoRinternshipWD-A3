@@ -3,7 +3,8 @@ class ProductsController < ApplicationController
   before_action :require_admin, only: [:index, :edit, :update, :destroy, :create]
 
   def index
-    @products = Product.all
+    @products = Product.order(:id)
+    @user = User.find_by(role: "admin")
   end
 
   def show
@@ -30,12 +31,14 @@ class ProductsController < ApplicationController
   end
 
   def update
-    if @product.update(product_params)
+    @product = Product.find(params[:id])
+
+    if @product.update(product_params.merge(edited_by: current_user.id))
       redirect_to product_path(@product), notice: 'Product was successfully updated.'
     else
       render :edit, alert: 'Error'
     end
-  end  
+  end 
 
   def destroy
     @product = Product.find(params[:id])

@@ -13,7 +13,7 @@
     .form-field
       = f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email"
       = f.password_field :password, autocomplete: "current-password", placeholder: "Password"
-      = f.submit "Log in", class: "btn"
+      = f.submit "Log in", class: "btn button"
       - if devise_mapping.rememberable?
         .form-checks
           = f.check_box :remember_me

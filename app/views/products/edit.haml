@@ -1,34 +1,31 @@
-- if alert.present?
-  .alert.alert-danger= alert
+= stylesheet_link_tag 'form'
+= stylesheet_link_tag 'buttons'
 
-%h1 Edit Product
+- provide(:title, "Edit Product##{@product.id}")
+.container
+  %h1.form-header Edit Product##{@product.id}
+  = form_for @product, url: product_path(@product), method: :patch, html: { multipart: true } do |f|
+    .form-field
+      = f.text_field :title, placeholder: 'Title* '
+      - if @product.errors.has_key?(:title)
+        %p.text-danger= @product.errors[:title].first
+    
+      = f.text_area :description, placeholder: 'Description* (minimum 100 characters)', rows: 4
+      - if @product.errors.has_key?(:description)
+        %p.text-danger= @product.errors[:description].first
 
-= form_for @product, url: product_path(@product), method: :patch, html: { multipart: true } do |f|
-  .field
-    = f.label :title
-    = f.text_field :title, class: 'form-control'
-  
-  .field
-    = f.label :description
-    = f.text_area :description, class: 'form-control'
-  
-  .field
-    = f.label :price
-    = f.text_field :price, class: 'form-control'
-  
-  .field
-    = f.label :vegetarian
-    = f.select :vegetarian, options_for_select([['Yes', true], ['No', false]], @product.vegetarian), { }, class: 'form-select'
-  
-  .field
-    = f.label :category
-    = f.select :category, options_for_select(Product.categories.keys.map { |c| [c.humanize, c] }, @product.category), { }, class: 'form-select'
-  
-  .field
-    = f.label :photo
-    = f.file_field :photo, class: 'form-control'
-  
-  .actions
-    = f.submit 'Update Product', class: 'btn btn-primary'
-  
-= link_to 'Back', products_path, class: 'btn btn-secondary'
+      = f.text_field :price, placeholder: 'Price* '
+      - if @product.errors.has_key?(:price)
+        %p.text-danger= @product.errors[:price].first
+    
+      = f.select :vegetarian, options_for_select([['Vegetarian', true], ['Non-Vegetarian', false]])
+
+      = f.select :category, options_for_select( Product.categories.keys.map { |c| [c.humanize, c] })
+      - if @product.errors.has_key?(:category)
+        %p.text-danger= @product.errors[:category].first
+    
+      = f.file_field :photo
+
+      = f.submit 'Update Product', class: 'button'
+    
+  = link_to 'Back', products_path, class: 'back-link'

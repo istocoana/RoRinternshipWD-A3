@@ -26,7 +26,8 @@
             - order.order_items.each do |item|
               %li
                 = item.product.title
-                %strong $#{ item.product.price }
+                %strong $#{ item.product.price * item.quantity }
+                = "q: #{  item.quantity }"
         = link_to 'View Order', order_path(order), class: "link"
 
   = link_to 'Back', :back, class: "back-link"

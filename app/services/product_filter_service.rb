@@ -16,10 +16,10 @@ class ProductFilterService
       products = products.where(vegetarian: is_vegetarian)
     end
 
-    if @params[:min_price].present? && @params[:max_price].present?
-      min_price = @params[:min_price].to_f
-      max_price = @params[:max_price].to_f
-      products = products.where(price: min_price..max_price)
+    if @params[:order_by] == 'price'
+      products = products.order(price: :asc)
+    elsif @params[:order_by] == '-price' 
+      products = products.order(price: :desc)
     end
     
     products
@@ -36,6 +36,10 @@ class ProductFilterService
   
       if params[:vegetarian].present? && ['true', 'false'].include?(params[:vegetarian])
         validated_params[:vegetarian] = params[:vegetarian]
+      end
+
+      if ['price', '-price'].include?(params[:order_by])
+        validated_params[:order_by] = params[:order_by]
       end
   
       validated_params

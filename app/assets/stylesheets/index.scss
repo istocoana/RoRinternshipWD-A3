@@ -46,7 +46,6 @@
   font-style: italic;
 }
 
-
 .bar {
   padding: 0 260px 0 260px;
   display: flex;
@@ -64,13 +63,12 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 10px;
+  gap:5px;
 }
 
 .categories form {
   display: flex;
   flex-direction: row;
-  gap: 10px;
 }
 
 .dropdown {
@@ -81,7 +79,7 @@
   align-items: center;
   justify-content: center;
   padding: 10px;
-  width: 150px;
+  width: 160px;
   
   .dropdown-content {
     cursor: pointer;
@@ -114,15 +112,15 @@
   .bi {
     color: rgba(242, 148, 86, 255);
   }
-
-  .bi::before,
-  [class^="bi-"]::before,
-  [class*=" bi-"]::before {
-   margin-bottom: 2px;
-  }
 }
 
-#dropdown-content1, #dropdown-content2 {
+.bi::before,
+[class^="bi-"]::before,
+[class*=" bi-"]::before {
+ margin-bottom: 2px;
+}
+
+#dropdown-content1, #dropdown-content2, #dropdown-content3{
   display: none;
 }
 
@@ -187,7 +185,7 @@
   }
 
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.06);
     box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 5px;
   }
 }
@@ -215,15 +213,21 @@
 }
 
 .food-price {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   color: rgba(242, 148, 86, 255);
   font-weight: bold;
   font-size: 10px;
-
 }
 
 .view-more-link {
   text-decoration: none;
   font-weight: bold;
   color: rgb(124, 117, 117);
+  &:hover {
+    text-decoration: underline;
+    color: rgb(100, 95, 95); 
+  }
 }
 

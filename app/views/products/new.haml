@@ -1,44 +1,36 @@
-- if notice.present?
-  .notice.alert.alert-success= notice
-- elsif alert.present?
-  .alert.alert-danger= alert
+= stylesheet_link_tag 'form'
+= stylesheet_link_tag 'buttons'
 
-%h1 New Product
+- provide(:title, 'Add a new product')
 
-= form_for @product, url: products_path, method: :post, html: { multipart: true } do |f|
-  .field
-    = f.label :title
-    = f.text_field :title, class: 'form-control'
-    - if @product.errors.has_key?(:title)
-      %p.text-danger= @product.errors[:title].first
-  
-  .field
-    = f.label :description
-    = f.text_area :description, class: 'form-control'
-    - if @product.errors.has_key?(:description)
-      %p.text-danger= @product.errors[:description].first
-  
-  .field
-    = f.label :price
-    = f.text_field :price, class: 'form-control'
-    - if @product.errors.has_key?(:price)
-      %p.text-danger= @product.errors[:price].first
-  
-  .field
-    = f.label :vegetarian
-    = f.select :vegetarian, options_for_select([['Yes', true], ['No', false]], @product.vegetarian), class: 'form-select'
+.container
+  %h1.form-header Add A New Product
+  - if notice.present?
+    .notice.alert.alert-success= notice
+  - elsif alert.present?
+    .alert.alert-danger= alert
+  = form_for @product, url: products_path, method: :post, html: { multipart: true } do |f|
+    .form-field
+      = f.text_field :title, placeholder: 'Title* '
+      - if @product.errors.has_key?(:title)
+        %p.text-danger= @product.errors[:title].first
+    
+      = f.text_area :description, placeholder: 'Description* (minimum 100 characters)'
+      - if @product.errors.has_key?(:description)
+        %p.text-danger= @product.errors[:description].first
 
-  .field
-    = f.label :category
-    = f.select :category, Product.categories.keys.map { |c| [c.humanize, c] }, class: 'form-select'
-    - if @product.errors.has_key?(:category)
-      %p.text-danger= @product.errors[:category].first
-  
-  .field
-    = f.label :photo
-    = f.file_field :photo
-  
-  .actions
-    = f.submit 'Create Product', class: 'btn btn-primary'
-  
-= link_to 'Back', :back , class: 'btn btn-secondary'
+      = f.text_field :price, placeholder: 'Price* '
+      - if @product.errors.has_key?(:price)
+        %p.text-danger= @product.errors[:price].first
+    
+      = f.select :vegetarian, options_for_select([['Vegetarian', true], ['Non-Vegetarian', false]]), prompt: 'Choose an option'
+
+      = f.select :category, options_for_select([['Choose a category', nil]] + Product.categories.keys.map { |c| [c.humanize, c] })
+      - if @product.errors.has_key?(:category)
+        %p.text-danger= @product.errors[:category].first
+    
+      = f.file_field :photo
+
+      = f.submit 'Add Product', class: 'button'
+    
+  = link_to 'Back', :back , class: 'back-link '

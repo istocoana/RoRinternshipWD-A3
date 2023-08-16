@@ -45,15 +45,28 @@
   align-content: center;
   gap: 20px;
 
-  input {
+  input, textarea, select {
     padding: 10px 20px;
     height: 20%;
     border: 1px solid lightgrey;
     border-radius: 10px;
     outline: none;
+    cursor: pointer;
+  }
+
+  input::file-selector-button {
+    border-radius: 7px;
+    border: 1px solid lightgrey;
+    font-size: smaller;
+    padding: 5px 10px;
+    margin-right: 20px;
+    cursor: pointer;
+    &:hover {
+      background-color: lightgray;
+    }
   }
    
-  input:focus {
+  input:focus, textarea:focus, select:focus {
     border: 1.5px solid rgba(242, 148, 86, 255);
   }
   
@@ -82,3 +95,4 @@
 .alert-danger {
   font-size: 13px;
 }
+

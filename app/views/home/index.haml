@@ -1,6 +1,7 @@
 = javascript_include_tag 'category-filter'
 = javascript_include_tag 'price-filter', defer: true
 = javascript_include_tag 'cart'
+= javascript_include_tag 'tooltip'
 = stylesheet_link_tag 'cart'
 = stylesheet_link_tag 'buttons'
 = stylesheet_link_tag "products_images"
@@ -41,8 +42,20 @@
                 Vegetarian
               %a{ href: "#", onclick: "submitFormWithVegetarian(false, 'Non-vegetarian')" } 
                 Non-vegetarian
+        
+          .dropdown
+            %div{ onclick: "toggleDropdownMenu('dropdown-content3', 'arrow3')" }
+              %span#sorting= @sorting.presence || "Sorting"
+              %i#arrow3.bi.bi-caret-down-fill
+            .dropdown-content#dropdown-content3
+              %a{ href: "#", onclick: "submitFormWithSorting('')" } None
+              %a{ href: "#", onclick: "submitFormWithSorting('price')" } Price Ascending
+              %a{ href: "#", onclick: "submitFormWithSorting('-price')" } Price Descending
+
+          = hidden_field_tag :order_by, params[:order_by]
           = hidden_field_tag :category, params[:category]
           = hidden_field_tag :vegetarian, params[:vegetarian]
+
 
       .price-filter
         %p#min-slider
@@ -80,7 +93,8 @@
                 %p
                   = link_to 'View Cart', cart_path, class: "link"
       - elsif current_user.role == "admin"
-        = link_to "New Product", new_product_path
+        %a.new-product#tooltip{ href: new_product_path,  title: 'New Product' } 
+          %i.bi.bi-plus-circle-fill
 
   .menu
     - @products.each do |product|
@@ -106,7 +120,8 @@
               %a.add-to-cart{ href: add_to_cart_path(product_id: product.id), method: :post }
                 %i.bi.bi-basket3-fill
             - elsif current_user.role == "admin"
-              = link_to "Edit product", edit_product_path(product)
+              %a.button.btn.btn-sm.edit-product{ href: edit_product_path(product),  title: 'Edit Product' }
+                %i.bi.bi-pencil-fill
 
 
 
