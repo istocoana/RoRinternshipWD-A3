@@ -15,8 +15,7 @@
 !/tmp/storage/
 !/tmp/storage/.keep
 
-/public/assets
-
 /config/master.key
 
 public/
+.byebug-history
