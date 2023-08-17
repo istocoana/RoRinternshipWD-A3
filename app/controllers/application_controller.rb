@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
   
   def store_location
     unless params[:controller] == "devise/sessions"
-      session[:user_return_to] = root_path unless params[:controller] == "devise/sessions"
-    end
+      session[:user_return_to] = root_path
+    end    
   end
 
   def stored_location_for(resource_or_scope)

@@ -1,5 +1,4 @@
 class HomeController < ApplicationController
-  
   def index 
     @products = ProductFilterService.new(params).filter
     
@@ -8,6 +7,5 @@ class HomeController < ApplicationController
     @sorting = params[:order_by] || 'Sorting'
     
     @orders = Order.all
-   
   end
 end

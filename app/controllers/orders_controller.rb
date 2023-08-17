@@ -3,34 +3,25 @@ class OrdersController < ApplicationController
   def create
     @product = Product.find(params[:product_id])
     order
-  
     begin
-      if @product
-        existing_order_item = @order.order_items.find_by(product: @product)
-      
-        if existing_order_item
-          existing_order_item.quantity += 1
-          if existing_order_item.save
-            redirect_to root_path, notice: 'Product added to cart.'
-          else
-            redirect_to root_path, notice: 'Error updating cart.'
-          end
-        else
-          @order_item = @order.order_items.new(product: @product, quantity: 1, out_of_stock: false)
-          if @order_item.save
-            redirect_to root_path, notice: 'Product added to cart.'
-          else
-            redirect_to root_path, notice: "Error adding product to cart."
-          end
-        end
+      redirect_to root_path, notice: 'Product not found.' unless @product
+  
+      existing_order_item = @order.order_items.find_by(product: @product)
+  
+      if existing_order_item
+        existing_order_item.quantity += 1
+        notice_message = existing_order_item.save ? 'Product added to cart.' : 'Error updating cart.'
+        redirect_to root_path, notice: notice_message
       else
-        redirect_to root_path, notice: 'Product not found.'
+        @order_item = @order.order_items.new(product: @product, quantity: 1, out_of_stock: false)
+        notice_message = @order_item.save ? 'Product added to cart.' : 'Error adding product to cart.'
+        redirect_to root_path, notice: notice_message
       end
-    rescue => ex
-      redirect_to root_path, notice: "Error adding product to cart: #{ex.message}"
+    rescue => error
+      redirect_to root_path, notice: "Error adding product to cart: #{error.message}"
     end
   end
-  
+   
   def handle
     @order = Order.find(params[:id])
     @order.update(status: "handled")
@@ -102,6 +93,3 @@ class OrdersController < ApplicationController
   end
 
 end
-
-
-
