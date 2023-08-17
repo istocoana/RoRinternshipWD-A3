@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.2.2"
 
+gem 'toastr-rails', '~> 1.0', '>= 1.0.3'
+
 gem 'jquery-rails', '~> 4.4'
 
 gem 'cloudinary'

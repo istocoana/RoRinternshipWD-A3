@@ -2,10 +2,6 @@
 = stylesheet_link_tag 'buttons'
 
 - provide(:title, "Manage your products")
-- if notice.present?
-  .notice.alert.alert-success= notice
-- elsif alert.present?
-  .alert.alert-danger= alert
 
 .container
   %h2.products-header Manage Your Products
@@ -59,11 +55,13 @@
               ID:
               = product.edited_by
               %br/
-              e-mail:
-              = User.find(product.edited_by).email
-              %br/
-              role: 
-              = User.find(product.edited_by).role
+              - if User.exists?(product.edited_by)
+                = User.find(product.edited_by).email
+                %br/
+                role:
+                = User.find(product.edited_by).role
+              - else
+                = 'User deleted'
         %p.actions
           = link_to 'View', product_path(product), class: 'btn btn-sm btn-primary'
           = link_to 'Edit', edit_product_path(product), class: 'btn btn-sm btn-secondary'

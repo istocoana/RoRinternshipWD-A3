@@ -6,8 +6,6 @@
 .container
   .cart-header.mb-4
     %h1 Cart
-    - if notice.present?
-      .notice.alert.alert-success= notice
   
   .cart-details
     - @orders.each do |order|

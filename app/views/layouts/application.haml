@@ -9,20 +9,23 @@
     %link{ rel: "preconnect", href: "https://fonts.googleapis.com" }
     %link{ rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: true }
     %link{ href: "https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap", rel: "stylesheet" }
-    = javascript_include_tag "application"
+    = stylesheet_link_tag "toastr.min.css"
     = stylesheet_link_tag "application", "data-turbo-track" => "reload"
     = stylesheet_link_tag "nouislider.min", media: "all"
     = javascript_include_tag "nouislider.min"
+    = javascript_include_tag "toastr.min"
+    = javascript_include_tag "application"
 
   %body{  style: "font-family: 'Poppins';" } 
     .header
       = render "layouts/header"
     .main
-      -# %p.notice
-      -#   = notice
-      -# -# %p.alert
-      -# -#   = alert
+      .notices{ style: 'display: none' }
+        %p.notice(data-notice="#{j(notice)}")
+        %p.alert(data-alert="#{j(alert)}")
+
       = yield
+      
     .footer
       = render "layouts/footer"
 

@@ -1,10 +1,12 @@
 class AdminController < ApplicationController
-  before_action :authenticate_admin
+  before_action :authenticate_admin!
 
   def orders
     @product = Product.all
+
     default_order_by = 'status'
 
+    @orders = Order.all
     @orders = case params[:order_by]
               when 'price'
                 @orders.sort_by(&:total_price)
