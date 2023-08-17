@@ -26,10 +26,10 @@
       .my-profile
         %p
           = "#{current_user.role} profile"
-          = current_user.profile.first_name
+          = current_user.profile.first_name if current_user.profile
           %i#arrow.bi.bi-caret-down-fill
         .dropdown-content#dropdown-content{ class: current_page?(root_path) ? nil : 'not-home' }
-          - if current_user.role == 'customer'
+          - if current_user.role == 'customer' 
             .cart
               = link_to 'Cart', cart_path
             .orders
