@@ -17,7 +17,8 @@
 
 /config/master.key
 
-public/
-/node_modules
-/package.json
-/pachage-lock.json
+/public/
+
+.byebug_history
+
+node_modules/
