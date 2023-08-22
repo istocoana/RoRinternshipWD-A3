@@ -1,3 +1,5 @@
+= javascript_include_tag 'dropdown'
+
 .navbar{ class: current_page?(root_path) ? nil : 'not-home' }
   .left-logo 
     = link_to root_path do
@@ -21,11 +23,31 @@
     = link_to "Contacts", "/contacts"
     - if user_signed_in?
       %i.bi.bi-circle-fill
-      = link_to "Sign out", destroy_user_session_path, method: :delete, 'data-turbo-method': :delete    
-      = link_to 'My Profile', user_profile_path
+      .my-profile
+        %p
+          = "#{current_user.role} profile"
+          = current_user.profile.first_name if current_user.profile
+          %i#arrow.bi.bi-caret-down-fill
+        .dropdown-content#dropdown-content{ class: current_page?(root_path) ? nil : 'not-home' }
+          - if current_user.role == 'customer' 
+            .cart
+              = link_to 'Cart', cart_path
+            .orders
+              = link_to 'Orders', orders_page_path
+          -elsif current_user.role == "admin"
+            .products
+              = link_to "Products", products_path
+            .orders
+              = link_to "Orders", admin_orders_path	
+          .profile 
+            = link_to 'View Profile', user_profile_path
+          .sign-out
+            = link_to "Sign out", destroy_user_session_path, method: :delete, 'data-turbo-method': :delete    
+
     - else
       %i.bi.bi-circle-fill
       = link_to "Sign up", new_user_registration_path
+      %i.bi.bi-circle-fill
       = link_to "Log in", new_user_session_path
    
 

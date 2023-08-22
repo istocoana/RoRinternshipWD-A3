@@ -9,7 +9,7 @@
     = render "devise/shared/error_messages", resource: resource
     .form-field
       = f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email *"
-      = f.submit "Send me reset password instructions", class: "btn"
+      = f.submit "Send me reset password instructions", class: "btn button"
       %p
         = link_to "Log in", new_session_path(resource_name), class: "link"
         or

@@ -1,6 +1,8 @@
 = stylesheet_link_tag "form"
 = stylesheet_link_tag "buttons"
 
+- provide(:title, "Editing your profile")
+
 .container
   .profile-form
     %h3.form-header Edit your profile data
@@ -9,7 +11,8 @@
         = f.text_field :first_name, placeholder: 'First name *'
         = f.text_field :last_name, placeholder: 'Last name *'
         = f.text_field :phone, placeholder: 'Phone *' 
-        = f.text_field :street_address, placeholder: 'Street Address *'
-        = f.text_field :city, placeholder: 'City *'
-        = f.text_field :county, placeholder: 'County *'
-        = f.submit "Update Profile", class: "btn"
+        - if current_user.role == 'customer'
+          = f.text_field :street_address, placeholder: 'Street Address *'
+          = f.text_field :city, placeholder: 'City *'
+          = f.text_field :county, placeholder: 'County *'
+        = f.submit "Update Profile", class: "button"

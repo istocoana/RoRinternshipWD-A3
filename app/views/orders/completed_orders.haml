@@ -1,0 +1,34 @@
+= stylesheet_link_tag "orders"
+= stylesheet_link_tag "buttons"
+
+- provide(:title, "Completed Orders")
+
+.container
+  .order-header
+    %h1 Your Orders
+  
+  .order-details
+    - @orders.each do |order|
+      - if notice.present?
+        .notice= notice
+      .order-item
+        .order-status 
+          %strong Order ID:
+          = order.id
+          %br/
+          %strong Status:
+          %span{ :class => ("completed" if order.status == 'completed' ) }= order.status
+    
+        .order-products
+          %p
+            %strong Products:
+          %ol
+            - order.order_items.each do |item|
+              %li
+                = item.product.title
+                %strong $#{ item.product.price * item.quantity }
+                = "q: #{  item.quantity }"
+        = link_to 'View Order', order_path(order), class: "link"
+
+  = link_to 'Back', :back, class: "back-link"
+      
