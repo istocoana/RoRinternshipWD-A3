@@ -12,6 +12,7 @@
       - if devise_mapping.confirmable? && resource.pending_reconfirmation?
         %p
           Currently waiting confirmation for: #{ resource.unconfirmed_email }
+      %p.comments
         %strong
         (leave blank if you don't want to change it)
       = f.password_field :password, autocomplete: "new-password", placeholder: "New password"

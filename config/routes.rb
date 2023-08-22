@@ -8,9 +8,6 @@ Rails.application.routes.draw do
   get "/contacts", to: "static_pages#contacts"
   get "/services", to: "static_pages#services"
   get '/services/product_filter_service', to: 'product_filter_service#filter'
-
-  resources :products
-  resources :profiles, only: [:new, :create, :edit, :update]
   get 'profile', to: 'profiles#show', as: :user_profile
   get 'profile_updated', to: 'profiles#updated', as: :profile_updated
   get 'add_to_cart/:product_id', to: 'orders#create', as: 'add_to_cart'
@@ -25,5 +22,14 @@ Rails.application.routes.draw do
       delete 'remove_from_cart/:order_item_id', action: :remove_from_cart, as: :remove_from_cart
     end
   end
+
+  resources :products
+  resources :profiles, only: [:new, :create, :edit, :update]
+  resources :orders do
+    member do
+      patch :handle, to: 'orders#handle'
+    end
+  end
+
 
 end

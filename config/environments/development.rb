@@ -1,11 +1,13 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
-  # Settings specified here will take precedence over those in config/application.rb.
+  
+  # config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
-  # In the development environment your application's code is reloaded any time
-  # it changes. This slows down response time but is perfect for development
-  # since you don't have to restart the web server when you make code changes.
+  config.active_storage.service = :cloudinary
+
+  config.active_storage.variant_processor = :mini_magick
+
   config.cache_classes = false
 
   config.eager_load = false
@@ -28,10 +30,6 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
-  # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :local
-
-  # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.perform_caching = false

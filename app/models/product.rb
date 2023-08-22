@@ -18,4 +18,5 @@ class Product < ApplicationRecord
     drink: 4
    }
     
+
 end
