@@ -14,23 +14,21 @@ Rails.application.routes.draw do
   post 'complete_order', to: 'orders#complete_order', as: 'complete_order'
   get 'completed_orders', to: 'orders#completed_orders', as: 'completed_orders'
   get "orders_page", to: "orders#orders_page", as: "orders_page"
-
   get 'admin/orders', to: 'admin#orders', as: 'admin_orders'
-
+  
   resources :orders, only: [:show] do
     collection do
       delete 'remove_from_cart/:order_item_id', action: :remove_from_cart, as: :remove_from_cart
     end
   end
+
   resources :products
   resources :profiles, only: [:new, :create, :edit, :update]
-  
-  
   resources :orders do
     member do
       patch :handle, to: 'orders#handle'
     end
   end
 
-
+  
 end

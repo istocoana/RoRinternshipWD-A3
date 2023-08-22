@@ -17,6 +17,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
+    @product.photo.attach(params[:product][:photo]) if params[:product][:photo]
 
     if @product.save
       redirect_to product_path(@product), notice: 'Product was successfully created.'
@@ -36,7 +37,7 @@ class ProductsController < ApplicationController
     if @product.update(product_params.merge(edited_by: current_user.id))
       redirect_to product_path(@product), notice: 'Product was successfully updated.'
     else
-      render :edit, alert: 'Error'
+      render :edit, alert: 'Error creating a new product'
     end
   end 
 
@@ -76,7 +77,7 @@ class ProductsController < ApplicationController
   end
 
   def require_admin
-    unless current_user.role == "admin"
+    unless current_user && current_user.role == "admin"
       redirect_to root_path, alert: "Access denied."
     end
   end

@@ -1,6 +1,6 @@
 class AdminController < ApplicationController
   before_action :authenticate_admin!
-
+  
   def orders
     @product = Product.all
 
@@ -20,9 +20,9 @@ class AdminController < ApplicationController
                 @orders.order(default_order_by.to_sym => :asc)
               end
   end
-  
+
   private
-  
+
   def authenticate_admin! 
     redirect_to root_path, alert: "Access denied." unless current_user.role == "admin"
   end

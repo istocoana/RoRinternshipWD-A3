@@ -41,15 +41,15 @@ class OrdersController < ApplicationController
       @order_item.save
     else
       @order_item.destroy
-    end
+    end    
   
     if request.referrer == root_path
-      redirect_to original_url, notice: 'Product quantity decreased in cart.'
+      redirect_to root_path, notice: 'Product quantity decreased in cart.'
     else
       redirect_to cart_path, notice: 'Product quantity decreased in cart.'
     end
   end
-
+  
   def complete_order
     @user_processing_orders = current_user.orders.includes(:order_items, :products).where(status: 'processing')
   

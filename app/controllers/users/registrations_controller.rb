@@ -1,23 +1,24 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-    def new
+  def new
     build_resource({})
     resource.build_profile
     respond_with resource
   end
 
   def create
-    build_resource(sign_up_params)
-
-    if resource.valid? && resource.save
+    build_resource(sign_up_params)     
+  
+    if resource.save
       if resource.role == 'admin'
         handle_registration_success(new_profile_path)
       else
         handle_registration_success(resource.role == 'customer' ? new_profile_path : root_path)
       end
+
     else
       handle_registration_failure
     end
-  end
+end
 
   protected
 
@@ -28,7 +29,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   private
 
   def sign_up_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :role)
+    params.require(:user).permit(:email, :password, :password_confirmation, :role, :pin_admin)
   end
 
   def handle_registration_success(redirect_path)
@@ -40,7 +41,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def handle_registration_failure
     clean_up_passwords(resource)
     set_minimum_password_length
-    flash[:alert] = resource.profile.errors.any? ? "Please correct the errors in the profile form." : nil
+    flash[:alert] = resource.errors.any? ? "Please correct the errors in the profile form." : nil
+   
     respond_with resource
   end
 end

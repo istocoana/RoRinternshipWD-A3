@@ -12,7 +12,7 @@
       
       .cart-items
         - order.order_items.each do |item|
-          .cart-item
+          .cart-item{ class: (item.product.category == "drink" ? 'cart-drink-photo' : '')}
             .cart-image
               - if item.product.photo.attached?
                 = image_tag item.product.photo

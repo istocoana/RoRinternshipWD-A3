@@ -99,9 +99,9 @@
   .menu
     - @products.each do |product|
       .item#filtered-results{ "data-price" => product.price }
-        .food-image
+        .food-image{ class: (product.category == "drink" ? 'drink-photo' : 'image')}
           - if product.photo.attached?
-            = image_tag product.photo, class: "food-image"
+            = image_tag product.photo
           - else
             %p No photo available
         .food-text
@@ -122,6 +122,4 @@
             - elsif current_user.role == "admin"
               %a.button.btn.btn-sm.edit-product{ href: edit_product_path(product),  title: 'Edit Product' }
                 %i.bi.bi-pencil-fill
-
-
-
+        

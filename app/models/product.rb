@@ -7,7 +7,7 @@ class Product < ApplicationRecord
   validates :description, presence: true, length: { minimum: 10, too_long: "%{count} characters is the maximum allowed" }
   validates :price, numericality: { greater_than_or_equal_to: 0 }, unless: -> { price.blank? } 
   validates :category, presence: true
-  validates :photo, presence: :true
+  validates :photo, presence: true
   validates :vegetarian, inclusion: { in: [true, false] }, allow_nil: true
 
   enum category: { 

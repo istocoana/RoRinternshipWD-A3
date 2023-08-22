@@ -3,6 +3,14 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.2.2"
 
+gem 'rails-controller-testing'
+
+gem "ruby-vips"
+
+gem 'faker', '~> 3.2'
+
+gem 'factory_bot_rails'
+
 gem 'toastr-rails', '~> 1.0', '>= 1.0.3'
 
 gem 'jquery-rails', '~> 4.4'
@@ -56,4 +64,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem 'cloudinary'
 end

@@ -4,7 +4,7 @@
   let filteredResults = document.getElementById("filtered-results"); 
 
   noUiSlider.create(uislider, {
-    start: [5, 55],
+    start: [2.4, 55],
     connect: true,
     range: {
       min: 0,

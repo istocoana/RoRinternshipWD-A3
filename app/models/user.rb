@@ -10,7 +10,7 @@ class User < ApplicationRecord
   validates :password, presence: true, confirmation: true
   validates :password_confirmation, presence: true
   validates :role, inclusion: { in: ['admin', 'customer'] }
-       
+
   accepts_nested_attributes_for :profile
 
 end
