@@ -1,12 +1,13 @@
 class ProductFilterService
   def initialize(params)
-    @params = params
+    @params = validate_params(params)
   end
+  
 
   def filter
     products = Product.all
     
-    if @params[:category].present? && @params[:category] != 'Category'
+    if @params[:category].present? && @params[:category].in?(Product.categories.keys)
       products = products.where(category: @params[:category])
     end
     
@@ -15,27 +16,32 @@ class ProductFilterService
       products = products.where(vegetarian: is_vegetarian)
     end
 
-    if @params[:min_price].present? && @params[:max_price].present?
-      min_price = @params[:min_price].to_f
-      max_price = @params[:max_price].to_f
-      products = products.where(price: min_price..max_price)
+    if @params[:order_by] == 'price'
+      products = products.order(price: :asc)
+    elsif @params[:order_by] == '-price' 
+      products = products.order(price: :desc)
     end
-
-    products = apply_sort(products)
-
+    
     products
     end
 
     private
 
-    def apply_sort(products)
-      if @params[:sort_by] == 'price'
-        if @params[:sort_order] == 'asc'
-          products = products.order(price: :asc)
-        elsif @params[:sort_order] == 'desc'
-          products = products.order(price: :desc)
-        end
+    def validate_params(params)
+      validated_params = {}
+  
+      if params[:category].present? && params[:category] != 'Category'
+        validated_params[:category] = params[:category]
       end
-    products
+  
+      if params[:vegetarian].present? && ['true', 'false'].include?(params[:vegetarian])
+        validated_params[:vegetarian] = params[:vegetarian]
+      end
+
+      if ['price', '-price'].include?(params[:order_by])
+        validated_params[:order_by] = params[:order_by]
+      end
+  
+      validated_params
     end
 end

@@ -15,8 +15,10 @@
 !/tmp/storage/
 !/tmp/storage/.keep
 
-/public/assets
-
 /config/master.key
 
-public/
+/public/
+
+.byebug_history
+
+node_modules/

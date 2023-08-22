@@ -1,0 +1,73 @@
+.container {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cart-header h1{
+  font-weight: bold;
+}
+
+.cart-details {
+  display: flex;
+  flex-direction: row;
+  justify-content:  space-between;
+  gap: 30px;
+}
+
+.cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cart-item {
+  display: flex;
+  flex-direction: row;
+  height: 240px;
+  padding: 20px;
+  gap: 20px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 10px;
+}
+
+.cart-image {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.food-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  p {
+    margin-bottom: 5px;
+  }
+
+  .price {
+    font-weight: bold;
+  }
+
+  .description, .quantity {
+    font-size: 14px;
+  }
+}
+
+.order-status {
+  width: 300px;
+
+  p span {
+    color: rgb(243, 193, 135);
+  }
+}
+
+.remove {
+  font-size: 20px;;
+  color: rgb(240, 147, 147);
+}
+
