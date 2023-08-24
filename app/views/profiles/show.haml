@@ -29,6 +29,10 @@
         %p
           %strong County: 
           = @profile.county
+        %p 
+          %strong Token de Autentificare:
+          = @auth_token
+
     - else
       %p You don't have a profile yet.
 
