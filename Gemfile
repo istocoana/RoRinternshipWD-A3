@@ -3,6 +3,14 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.2.2"
 
+gem 'jwt'
+
+gem 'rack-cors', '~> 1.1', '>= 1.1.1'
+
+gem 'devise-jwt', '~> 0.11.0'
+
+gem 'alba', '~> 1.6'
+
 gem 'rails-controller-testing'
 
 gem "ruby-vips"
