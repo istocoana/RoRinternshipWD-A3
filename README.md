@@ -1,15 +1,16 @@
 # Eureka Caffe
-O aplicație Ruby on Rails pentru gestionarea unui restaurant online. Acesta include funcționalități precum un coș de cumpărături, sistem de livrare și monitorizarea statusului comenzilor utilizând PostgreSQL. <br> <br>
-Această aplicație a fost dezvoltată în cadrul unui internship de 6 săptămâni în perioada 17 iulie - 25 august, utilizând metodologia Scrum pentru managementul proiectului, la [Wolfpack Digital]([https://www.wolfpack-digital.com/](https://www.wolfpack-digital.com/). <br>
-Scopul internship-ului a fost să ofere o experiență practică în dezvoltarea aplicațiilor web folosind Ruby on Rails și PostgreSQL.  Echipa de dezvoltare a lucrât în strânsă colaborare cu mentori pentru a asigura o dezvoltare eficientă și aliniată cu cerințele. GitHub a fost folosit pentru versionarea codului și pentru a facilita feedback-ul din partea mentorilor.
 
-<br>
-## **Caracteristici** <br>
-- **Coș de cumpărături:** Permite utilizatorilor să adauge produse în coșul de cumpărături și să finalizeze comanda.
-<br>
-- **Livrare:** Implementează un sistem de livrare pentru a permite utilizatorilor să aleagă opțiuni de livrare și adrese.
-<br>
-- **Status Comandă:** Utilizează PostgreSQL pentru a urmări și actualiza statusul comenzilor, de la plasare până la livrare.
-<br>
-- Proiectul include și un **API web** care permite accesul la funcționalitățile principale ale aplicației. Acest API utilizează framework-ul Ruby on Rails pentru a oferi servicii web.
-<br>
+## Overview
+Eureka Caffe is a dynamic Ruby on Rails application for online restaurant management. It incorporates features such as a shopping cart, a delivery system, and order status monitoring using PostgreSQL.
+
+## Features
+- **Shopping Cart**: Users can add items to their cart and proceed to checkout.
+- **Delivery System**: A comprehensive delivery system allows users to specify delivery addresses and options.
+- **Order Status**: Built on PostgreSQL to provide live updates on order progress from placement to delivery.
+- **Web API**: Includes a web API to access core application functionalities, using Ruby on Rails for web services.
+
+## Development
+This project was developed over a six-week internship from July 17 to August 25, utilizing the Scrum methodology for project management, facilitated by [Wolfpack Digital](https://www.wolfpack-digital.com/). The internship was designed to offer hands-on experience in full-stack web application development, with a focus on using Ruby on Rails and PostgreSQL. The team worked in close collaboration with mentors, ensuring the development was efficient and aligned with project requirements.
+
+## Code Versioning
+We used GitHub for version control, providing a platform for code reviews and mentor feedback.
